@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product Filter</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#8ea9d6;
+}
+
+/* Navbar */
+nav{
+  background:#1f2937;
+  color:white;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:20px;
+}
+
+/* Page */
+.container{
+  padding:40px;
+}
+
+h1{
+  font-size:40px;
+  margin-bottom:20px;
+}
+
+/* Filter */
+.filter-box{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:30px;
+}
+
+select{
+  padding:10px 14px;
+  border-radius:10px;
+  border:none;
+  font-size:15px;
+}
+
+/* Products Grid */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+}
+
+/* Card */
+.card{
+  background:white;
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+
+.card h3{
+  margin:0;
+  font-size:22px;
+}
+
+.price{
+  font-size:20px;
+  font-weight:bold;
+  margin:10px 0;
+}
+
+.tag{
+  display:inline-block;
+  padding:6px 14px;
+  border-radius:20px;
+  font-size:14px;
+  color:white;
+}
+
+.electronics{
+  background:#2563eb;
+}
+
+.clothing{
+  background:#1e3a8a;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <h2>Experiment 2</h2>
+  <div>
+    <a href="./index.html">Experiment 2.1</a>
+    <a href="./productfilter.html">Experiment 2.2</a>
+    <a href="./drawing.html">Experiment 2.3</a>
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<div class="container">
+
+<h1>Product Filter</h1>
+
+<div class="filter-box">
+  <label>Filter by:</label>
+  <select id="filter">
+    <option value="all">All Products</option>
+    <option value="electronics">Electronics</option>
+    <option value="clothing">Clothing</option>
+  </select>
+</div>
+
+<div class="products" id="products"></div>
+
+</div>
+
+<!-- SCRIPT -->
+<script>
+const products = [
+  {name:"Wireless Headphones", price:129.99, category:"electronics"},
+  {name:"Cotton T-Shirt", price:24.99, category:"clothing"},
+  {name:"Bluetooth Speaker", price:89.99, category:"electronics"},
+  {name:"Denim Jeans", price:59.99, category:"clothing"}
+];
+
+const box = document.getElementById("products");
+const filter = document.getElementById("filter");
+
+function display(list){
+  box.innerHTML = "";
+  list.forEach(item => {
+    box.innerHTML += `
+      <div class="card">
+        <h3>${item.name}</h3>
+        <div class="price">$${item.price}</div>
+        <span class="tag ${item.category}">
+          ${item.category}
+        </span>
+      </div>
+    `;
+  });
+}
+
+display(products);
+
+filter.addEventListener("change", function(){
+  if(filter.value === "all"){
+    display(products);
+  } else {
+    display(products.filter(p => p.category === filter.value));
+  }
+});
+</script>

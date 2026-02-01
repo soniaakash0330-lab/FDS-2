@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Word Counter</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f4f4f4;
+}
+
+nav{
+  background:#1f2937;
+  color:white;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:20px;
+}
+
+.container{
+  text-align:center;
+  margin-top:80px;
+}
+
+textarea{
+  width:70%;
+  height:120px;
+  padding:10px;
+  font-size:16px;
+}
+
+p{
+  font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <h2>Experiment 2</h2>
+  <div>
+    <a href="./index.html">Experiment 2.1</a>
+    <a href="./productfilter.html">Experiment 2.2</a>
+    <a href="./drawing.html">Experiment 2.3</a>
+  </div>
+</nav>
+
+
+<div class="container">
+  <h1>Word Counter</h1>
+  <textarea id="text"></textarea>
+  <p id="count">0 / 150 Words</p>
+</div>
+
+<script>
+let t = document.getElementById("text");
+let c = document.getElementById("count");
+
+t.addEventListener("input", function(){
+  let words = t.value.trim().split(/\s+/);
+  let total = t.value.trim()=="" ? 0 : words.length;
+  c.innerText = total + " / 150 Words";
+});
+</script>
+
+</body>
+</html>

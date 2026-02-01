@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SVG Drawing Tool</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f4f4f4;
+}
+
+/* Navbar */
+nav{
+  background:#1f2937;
+  color:white;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:20px;
+}
+
+/* Page Center */
+.container{
+  text-align:center;
+  margin-top:40px;
+}
+
+/* SVG Canvas */
+svg{
+  border:2px solid black;
+  background:white;
+  cursor:crosshair;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <h2>Experiment 2</h2>
+  <div>
+    <a href="index.html">Experiment 2.1</a>
+    <a href="productfilter.html">Experiment 2.2</a>
+    <a href="drawing.html">Experiment 2.3</a>
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<div class="container">
+  <h1>SVG Drawing Tool</h1>
+
+  <svg id="board" width="700" height="350"></svg>
+</div>
+
+<!-- SCRIPT -->
+<script>
+const board = document.getElementById("board");
+let drawing = false;
+
+board.addEventListener("mousedown", function(e){
+  drawing = true;
+  draw(e);
+});
+
+board.addEventListener("mousemove", function(e){
+  if(drawing){
+    draw(e);
+  }
+});
+
+board.addEventListener("mouseup", function(){
+  drawing = false;
+});
+
+board.addEventListener("mouseleave", function(){
+  drawing = false;
+});
+
+function draw(e){
+  const rect = board.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  const circle = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "circle"
+  );
+
+  circle.setAttribute("cx", x);
+  circle.setAttribute("cy", y);
+  circle.setAttribute("r", 3);
+  circle.setAttribute("fill", "blue");
+
+  board.appendChild(circle);
+}
+</script>
+
+</body>
+</html>
